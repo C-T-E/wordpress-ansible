@@ -38,4 +38,8 @@
     - {'regexp': "define\\('DB_NAME', '(.)+'\\);", 'line': "define('DB_NAME', '{{wp_mysql_db}}');"}        
     - {'regexp': "define\\('DB_USER', '(.)+'\\);", 'line': "define('DB_USER', '{{wp_mysql_user}}');"}        
     - {'regexp': "define\\('DB_PASSWORD', '(.)+'\\);", 'line': "define('DB_PASSWORD', '{{wp_mysql_password}}');"}
-  
+
+- name: Ensure wordpress upload directory is 0755
+  become: yes
+  become_method: sudo
+  file: path=/var/www/wordpress/wp-content/uploads state=directory owner=nobody group=nogroup mode=0777
